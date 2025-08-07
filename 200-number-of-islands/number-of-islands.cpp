@@ -3,7 +3,7 @@
 // shree saraswatimataya namaha:|
 class Solution {
 public:
-   void dfs (int row,int col,vector<vector<int>>&grid,vector<vector<int>>&vis)
+   void bfs (int row,int col,vector<vector<int>>&grid,vector<vector<int>>&vis)
    {
     int n=grid.size();
     int m=grid[0].size();
@@ -49,7 +49,7 @@ public:
             {
                 if (mat[i][j]==1 && vis[i][j]==0)
                 {
-                    dfs(i,j,mat,vis);
+                    bfs(i,j,mat,vis);
                     ans++;
                 }
                 
