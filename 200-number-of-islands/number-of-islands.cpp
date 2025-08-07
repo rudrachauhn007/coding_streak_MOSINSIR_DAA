@@ -9,13 +9,22 @@ public:
     int m=grid[0].size();
     vis[row][col]=1;
     vector<vector<int>> delta={{1,0},{0,1},{-1,0},{0,-1}};
-    for (int i=0;i<4;i++)
+    queue<pair<int,int>> q;
+    q.push({row,col});
+    while (!q.empty())
     {
-        int nr=row+delta[i][0];
-        int nc=col+delta[i][1];
-        if (nr>=0 && nc>=0 && nr<n && nc<m && vis[nr][nc]==0 && grid[nr][nc]==1)
+        int cur_row=q.front().first;
+        int cur_col=q.front().second;
+        q.pop();
+        for (int i=0;i<4;i++)
         {
-            dfs(nr,nc,grid,vis);
+            int nr=cur_row+delta[i][0];
+            int nc=cur_col+delta[i][1];
+            if (nr>=0 && nc>=0 && nr<n && nc<m && vis[nr][nc]==0 && grid[nr][nc]==1)
+            {
+                vis[nr][nc]=1;
+                q.push({nr,nc});
+            }
         }
     }
    }
