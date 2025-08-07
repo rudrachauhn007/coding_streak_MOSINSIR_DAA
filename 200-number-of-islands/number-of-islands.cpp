@@ -41,7 +41,6 @@ public:
                 if (mat[i][j]==1 && vis[i][j]==0)
                 {
                     dfs(i,j,mat,vis);
-                    cout << i << " " << j << " " << mat[i][j] << endl;
                     ans++;
                 }
                 
