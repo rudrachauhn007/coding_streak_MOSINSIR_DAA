@@ -1,0 +1,31 @@
+// shree ganeshaya namaha:|
+// shree chamudamataya namaha:|
+// shree saraswatimataya namaha:|
+class Solution {
+  public:
+  void rec (int index,vector<int>&ans,vector<int>&arr,int sum)
+  {
+      if (index == arr.size())
+      {
+          ans.push_back(sum);
+          return;
+      }
+      ans.push_back(sum);
+      for (int i=index;i<arr.size();i++)
+      {
+          sum += arr[i];
+          rec(i+1,ans,arr,sum);
+          sum -= arr[i];
+      }
+  }
+    vector<int> subsetSums(vector<int>& arr) {
+        // code here
+        vector<int> ans;
+        rec (0,ans,arr,0);
+        sort(ans.begin(),ans.end());
+        return ans;
+        
+    }
+};
+
+link to the question - https://www.geeksforgeeks.org/problems/subset-sums2234/1&selectedLang=python3
