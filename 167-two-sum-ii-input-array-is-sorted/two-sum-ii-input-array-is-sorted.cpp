@@ -3,16 +3,36 @@
 // shree saraswatimataya namaha:|
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int,int> mpp;  // faster than map
-        for (int i=0;i<nums.size();i++)
+  int bin_srch(int left,int right,int target,vector<int>& nums)
+  {
+    while (left<= right)
+    {
+        int mid = (left+right)/2;
+        if (nums[mid]==target)
         {
-            int finding = target - nums[i];
-            if (mpp.find(finding)!=mpp.end())
+            return mid;
+        }
+        if (target > nums[mid])
+        {
+            left=mid+1;
+        }
+        else
+        {
+            right=mid-1;
+        }
+    }
+    return -1;
+  }
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int n=nums.size();
+        for (int i=0;i<nums.size()-1;i++)
+        {
+            int to_find= target-nums[i];
+            int got = bin_srch(i+1,n-1,to_find,nums);
+            if (got != -1)
             {
-                return {mpp[finding]+1, i+1}; // +1 if problem needs 1-based indexing
+                return {i+1,got+1};
             }
-            mpp[nums[i]] = i; // store index of current element
         }
         return {};
     }
