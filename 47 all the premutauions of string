@@ -1,0 +1,39 @@
+// shree ganeshaya namaha:|
+// shree chamudamataya namaha:|
+// shree saraswatimataya namaha:|
+class Solution {
+  public:
+  unordered_set<string> final_ans;
+  void recc (string& temp,vector<bool>freq,string& ori)
+  {
+      if (temp.size()==ori.size())
+      {
+          final_ans.insert(temp);
+          return;
+      }
+      for (int i=0;i<ori.size();i++)
+      {
+          if (!freq[i])
+          {
+              freq[i]=true;
+              temp+= ori[i];
+              recc(temp,freq,ori);
+              freq[i]=false;
+              temp.pop_back();
+          }
+      }
+  }
+    vector<string> findPermutation(string &s) {
+        // Code here there
+        vector<string> ans;
+        vector<bool> freq(s.size(),false);
+        string temp="";
+        recc(temp,freq,s);
+        for (auto it : final_ans)
+        {
+            ans.push_back(it);
+        }
+        return ans;
+    }
+};
+//link to problem =https://www.geeksforgeeks.org/problems/permutations-of-a-given-string2041/1
