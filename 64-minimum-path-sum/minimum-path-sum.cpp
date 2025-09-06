@@ -1,35 +1,40 @@
 // shree ganeshaya namaha:|
-// shree chamudamataya namaha:|
+// shree chaumdamataya namaha:|
 // shree saraswatimataya namaha:|
-
 class Solution {
 public:
-bool safe (int row,int col,int m,int n)
-{
-    return (row>=0 && col>=0 && row<m && col < n);
-}
-int solve (int row,int col,vector<vector<int>>& grid , vector<vector<int>>&dp)
-{
-    int n=grid.size();
-    int m=grid[0].size();
-    if (!safe(row,col,n,m)) return 1e9+10;
+    int minPathSum(vector<vector<int>>& matrix) {
+        int n=matrix.size();
+        int m=matrix[0].size();
+        vector<vector<int>> dp (n,vector<int>(m,0));
+        for (int i=0;i<n;i++)
+        {
+            for (int j=0;j<m;j++)
+            {
+                if (i==0 && j==0)
+                {
+                    dp[i][j]=matrix[i][j];
+                    continue;
+                }
+                int up=matrix[i][j];
+                if (i-1>=0) up += dp[i-1][j];
+                else up += (1e9);
+                int left = matrix[i][j];
+                if (j-1>=0) left += dp[i][j-1];
+                else
+                left += (1e9);
 
-    if (row== n-1 && col==m-1) return grid[row][col];
-
-    if (dp[row][col]!=-1) return dp[row][col];
-
-    int right = grid[row][col] + solve(row,col+1,grid,dp);
-    int down = grid[row][col] + solve (row+1,col,grid,dp);
-
-    return dp[row][col] = min(right,down);
-}
-    int minPathSum(vector<vector<int>>& grid) {
-        int n=grid.size();
-        int m=grid[0].size();
-        vector<vector<int>> dp(n,vector<int> (m+1,-1));
-        int ans= solve(0,0,grid,dp);
-
-        return ans;
-        
+                dp[i][j] = min(up,left);
+            }
+        }
+        for (int i=0;i<n;i++)
+        {
+            for (int j=0;j<m;j++)
+            {
+                cout << dp[i][j] << " ";
+            }
+            cout << endl;
+        }
+        return dp[n-1][m-1];
     }
 };
