@@ -17,6 +17,9 @@ public:
                     ans.push_back(n/i);
                 }
              }
+
+             if (ans.size() > 4)
+             return 0;
         }
         if (ans.size()==4)
         {
