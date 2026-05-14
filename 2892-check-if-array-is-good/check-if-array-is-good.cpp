@@ -7,7 +7,7 @@ public:
         int n=nums.size()-1;
         int ans = ((n)*(n+1))/2  + n ;
         int cnt=0;
-        map<int,int>mpp;
+        unordered_map<int,int>mpp;
         int maxi=0;
         for (auto it : nums)
         {
